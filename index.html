@@ -78,8 +78,8 @@
                     Кафе SaFar предлагает качественный фастфуд с местными ингредиентами и быстрой доставкой в Пенджикенте.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#menu" class="btn btn-secondary" data-translate="view-menu">Посмотреть меню</a>
-                    <a href="#" class="btn hero-btn-outline open-cart" data-translate="order-online">Заказать онлайн</a>
+                    <a href="#menu" class="btn btn-secondary" data-translate="view-menu">Заказать онлайн</a>
+                    <a href="#menu" class="btn hero-btn-outline open-cart" data-translate="order-online">Заказать онлайн</a>
                 </div>
             </div>
         </div>
@@ -1730,7 +1730,7 @@
             <p class="order-text" data-translate="order-text">
                 Закажите онлайн с доставкой или самовывозом и наслаждайтесь нашими блюдами дома или в офисе.
             </p>
-            <a href="#" class="order-btn" data-translate="order-btn">Заказать</a>
+            <a href="#" class=" order-btn btn hero-btn-outline open-cart" data-translate="order-online">Заказать</a>
         </div>
     </section>
 
@@ -1806,7 +1806,7 @@
             </div>
             <div class="footer-bottom">
                 <p data-translate="footer-copyright">
-                    &copy; 2025 Кафе SaFar. Все права защищены. |  Разработка <a href="https://t.me/xalilov_uc">Sino IT </a>
+                    &copy; 2025 Кафе SaFar. Все права защищены. |  Разработка <a href= "https://t.me/xalilov_uc" >Sino IT </a>
                 </p>
             </div>
         </div>
@@ -1911,7 +1911,42 @@
         </div>
     </div>
     <button id="scrollToTop" class="scroll-to-top">↑</button>
+
     
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    });
+
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].clientX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const threshold = 50; // Minimum swipe distance in pixels
+      const edgeThreshold = 30; // Left edge zone to detect open swipe
+
+      const deltaX = touchEndX - touchStartX;
+
+      if (!navMenu.classList.contains('active') && touchStartX < edgeThreshold && deltaX > threshold) {
+        // Swipe right from left edge to open menu
+        mobileToggle.classList.add('active');
+        navMenu.classList.add('active');
+      } else if (navMenu.classList.contains('active') && deltaX < -threshold) {
+        // Swipe left to close menu
+        mobileToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+      }
+    }
+  });
+</script>
     <script src="lang.js">    </script>
     <script src="script.js"></script>
 </body>
